@@ -1,0 +1,177 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SALONFINAL"
+        xmlns:AutoLotModelFINAL1="clr-namespace:AutoLotModelFINAL1;assembly=AutoLotModelFINAL1" x:Class="SALONFINAL.MainWindow"
+        mc:Ignorable="d"
+        Title="BeautyS" Height="450" Width="800" Loaded="Window_Loaded"
+     Background="#181735">
+    <Window.Resources>
+        <CollectionViewSource x:Key="customersViewSource" d:DesignSource="{d:DesignInstance {x:Type AutoLotModelFINAL1:Customers}, CreateList=True}"/>
+        <CollectionViewSource x:Key="servicesViewSource" d:DesignSource="{d:DesignInstance {x:Type AutoLotModelFINAL1:services}, CreateList=True}"/>
+        <CollectionViewSource x:Key="employeesViewSource" d:DesignSource="{d:DesignInstance {x:Type AutoLotModelFINAL1:Employees}, CreateList=True}"/>
+        <CollectionViewSource x:Key="hairstyleViewSource" d:DesignSource="{d:DesignInstance {x:Type AutoLotModelFINAL1:Hairstyle}, CreateList=True}"/>
+        <CollectionViewSource x:Key="appoitmentViewSource" d:DesignSource="{d:DesignInstance {x:Type AutoLotModelFINAL1:Appoitment}, CreateList=True}"/>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource employeesViewSource}">
+        <TabControl x:Name="TabControl" HorizontalAlignment="Left" Height="304" Margin="174,46,0,0" VerticalAlignment="Top" Width="437" SelectedIndex="{Binding Mode=OneWay}">
+            <TabItem x:Name="customers" Header="Customers" Margin="0,0,-4,-2" Foreground="#ff4c70" Background="#383660">
+                <Grid Background="#FFE5E5E5" DataContext="{StaticResource customersViewSource}" Margin="0,0,-0.333,2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="87*"/>
+                        <ColumnDefinition Width="301*"/>
+                        <ColumnDefinition Width="43*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="customersDataGrid" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="24.333,18,32.667,143.333" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Column="1" Grid.ColumnSpan="2" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="custIdColumn" Binding="{Binding CustId}" Header="Cust Id" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="first_NameColumn" Binding="{Binding First_Name}" Header="First Name" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="last_NameColumn" Binding="{Binding Last_Name}" Header="Last Name" Width="SizeToHeader"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="43.333,158,0,0" VerticalAlignment="Top" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Cust Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                        <TextBox x:Name="custIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding CustId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
+                        <Label Content="First Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+                        <TextBox x:Name="first_NameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding First_Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="Last Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+                        <TextBox x:Name="last_NameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Last_Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    </Grid>
+                    <Button x:Name="btnNext" Content="Next" HorizontalAlignment="Left" Margin="235.333,130,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <Button x:Name="btnPrev" Content="Previous" HorizontalAlignment="Left" Margin="24.333,130,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="btnPrev_Click"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="services" Header="Services" Margin="4,0,-7.333,-2" Foreground="#ff4c70" Background="#383660">
+                <Grid Background="#FFE5E5E5" DataContext="{StaticResource servicesViewSource}">
+                    <DataGrid x:Name="servicesDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="112,20,33.667,144.333" RowDetailsVisibilityMode="VisibleWhenSelected">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="descriptionColumn" Binding="{Binding Description}" Header="Description" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="idServiceColumn" Binding="{Binding IdService}" Header="Id Service" Width="SizeToHeader"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid x:Name="grid2" HorizontalAlignment="Left" Margin="148,191,0,0" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Description:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                        <TextBox x:Name="descriptionTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Description, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="Id Service:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+                        <TextBox x:Name="idServiceTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding IdService, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
+                    </Grid>
+                    <Button x:Name="btnNext1" Content="Next" HorizontalAlignment="Left" Margin="322,136,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button x:Name="btnPrev1" Content="Previous" HorizontalAlignment="Left" Margin="112,136,0,0" VerticalAlignment="Top" Width="75"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Hairstyle" Margin="73.333,0,-77.333,-2" Foreground="#ff4c70" Background="#383660">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="249*"/>
+                        <ColumnDefinition Width="19*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="16*"/>
+                        <ColumnDefinition Width="137*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="hairstyleDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource hairstyleViewSource}}" Margin="82,147,73.667,18.333" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.ColumnSpan="5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="idEmpColumn" Binding="{Binding idEmp}" Header="id Emp" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="idHairColumn" Binding="{Binding idHair}" Header="id Hair" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="idServiceColumn1" Binding="{Binding idService}" Header="id Service" Width="SizeToHeader"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <ComboBox x:Name="cmbEmployees" HorizontalAlignment="Left" Margin="60,46,0,0" VerticalAlignment="Top" Width="120" Height="22"/>
+                    <ComboBox x:Name="cmbServices" Grid.Column="2" HorizontalAlignment="Left" Margin="4,46,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="3" Height="22"/>
+                    <Label x:Name="lblemployees" Content="Employees" HorizontalAlignment="Left" Margin="60,15,0,0" VerticalAlignment="Top" Width="107"/>
+                    <Label x:Name="lblservices" Content="Services" Grid.Column="3" HorizontalAlignment="Left" Margin="0,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.456,0.795" Grid.ColumnSpan="2" Width="114"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Appoitment" Margin="76.333,0,-80,-2" Foreground="#ff4c70" Background="#383660">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="234*"/>
+                        <ColumnDefinition Width="197*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="appoitmentDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource appoitmentViewSource}}" Margin="89,128,66.667,35.333" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="idAppColumn" Binding="{Binding IdApp}" Header="Id App" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="idCustColumn" Binding="{Binding idCust}" Header="id Cust" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="idHairColumn1" Binding="{Binding idHair}" Header="id Hair" Width="SizeToHeader"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <ComboBox x:Name="cmbcustomers" HorizontalAlignment="Left" Margin="66,53,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox x:Name="cmbhairstyle" Grid.Column="1" HorizontalAlignment="Left" Margin="33,53,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="lblcustomers" Content="Customers" HorizontalAlignment="Left" Margin="66,22,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lblhairstyle" Content="Hairstyle" Grid.Column="1" HorizontalAlignment="Left" Margin="86,22,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="employees" Header="Employees" Margin="-132,0,128.333,-2" Foreground="#ff4c70" Background="#383660">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="99*"/>
+                        <ColumnDefinition Width="112*"/>
+                        <ColumnDefinition Width="216*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnNext2" Content="Next" HorizontalAlignment="Left" Margin="107.333,142,0,0" VerticalAlignment="Top" Width="75" Grid.Column="3"/>
+                    <Button x:Name="btnPrev2" Content="Previous" HorizontalAlignment="Left" Margin="19.333,142,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
+                    <DataGrid x:Name="employeesDataGrid" AutoGenerateColumns="False" Grid.ColumnSpan="2" Grid.Column="2" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="30.333,10,59.667,138.333" RowDetailsVisibilityMode="VisibleWhenSelected">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="descriptionColumn1" Binding="{Binding description}" Header="description" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="employees1Column" Binding="{Binding employees1}" Header="employees 1" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid x:Name="grid3" Grid.Column="2" HorizontalAlignment="Left" Margin="42.333,169,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="description:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                        <TextBox x:Name="descriptionTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding description, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="employees 1:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+                        <TextBox x:Name="employees1TextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding employees1, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+                        <TextBox x:Name="idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <GroupBox x:Name="gbOperations" Button.Click="gbOperations_Click" HorizontalAlignment="Left" Height="100" Margin="37,89,0,0" VerticalAlignment="Top" Width="107" BorderBrush="#ff4c70">
+            <StackPanel HorizontalAlignment="Left" Height="71" Margin="10,19,0,0" VerticalAlignment="Top" Width="76" x:Name="spOperations">
+                <Button x:Name="btnNew" Content="New" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="btnNew_Click"/>
+                <Button x:Name="btnEdit" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="btnEdit0_Click"/>
+                <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="23" Click="btnDelete0_Click"/>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox x:Name="gbActions" HorizontalAlignment="Left" Height="100" Margin="37,238,0,0" VerticalAlignment="Top" Width="107" BorderBrush="#ff4c70">
+            <StackPanel x:Name="spActions" HorizontalAlignment="Left" Height="46" Margin="10,24,0,0" VerticalAlignment="Top" Width="76">
+                <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="btnSave_Click"/>
+                <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
+            </StackPanel>
+        </GroupBox>
+
+
+    </Grid>
+</Window>
